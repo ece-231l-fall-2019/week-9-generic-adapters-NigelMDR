@@ -1,7 +1,6 @@
-#ifndef __EE231_List_h__
-#define __EE231_List_h__
+#include <iostream>
+#include <string>
 
-#include <cstddef>
 
 template<typename T>
 class List
@@ -9,99 +8,191 @@ class List
 	private:
 
 	typedef struct llist {
-		T val;
+		T value;
 		struct llist *next;
+		struct llist *prev;
 	} llist;
-
-	llist *_data;
-	size_t _size;
-
-	// private recursive copy so elements
-	// end up in the same order.
-	void reccopy(const llist *ptr)
-	{
-		if (ptr)
-		{
-			reccopy(ptr->next);
-			push_front(ptr->val);
-		}
-	}
+	llist *_head;
+	llist *_tail;
+	size_t _count;
 
 	public:
-	
 	// default constructor
 	List()
 	{
-		_data = 0;
-		_size = 0;
+		_tail = 0;
+		_head = 0;
+		_count = 0; 
 	}
 
 	// copy constructor
-	List(const List& other)
-	{
-		_data = 0;
-		_size = 0;
-		reccopy(other._data);
-	}
-
+	List(const List<T>&);
 	// destructor
 	~List()
-	{
-		clear();
-	}
-
-	// copy operator
-	List& operator=(const List& other)
-	{
-		reccopy(other._data);
-		return *this;
-	}
-
-	void clear()
 	{
 		while(!empty())
 			pop_front();
 	}
-
+	// copy operator	
+	List& operator=(const List& a)
+	{
+		for (const llist* b = a._head; b != 0; b = b->next)
+		{
+			push_back(b->value);
+		}	
+		return *this;
+	}
+	
 	T& front()
 	{
-		return _data->val;
+		return _head->value;
 	}
-
+	
+	T& back()
+	{
+		return _tail->value;
+	}
+	
 	const T& front() const
 	{
-		return _data->val;
+		return _head->value;
 	}
-
-	void push_front(const T& val)
+	
+	const T& back() const
 	{
-		llist *newItem = new llist;
-		newItem->val = val;
-		newItem->next = _data;
-		_data = newItem;
-		_size++;
+		return _tail->value;
+	}
+	//print function
+	void print(T message)
+	{
+		std::cout<<"-----------------"<<std::endl;
+		std::cout<<message<<std::endl;
+		for( llist *ptr = _head ; ptr != NULL; ptr = ptr->next)
+			std::cout << ptr->value << " ";
+		std::cout<< std::endl;
+		std::cout<<"-----------------"<<std::endl;
+	}
+	void push_front(const T& value)
+	{
+		llist *ptr = new llist;
+		ptr->value = value;
+
+		ptr->prev = NULL;
+		ptr->next = _head;
+		if( _head != NULL)
+			_head->prev = ptr;
+		if( _head == NULL )
+			_head = ptr;
+		_head = ptr;
+		_count++;
+		
 	}
 
+	void push_back (const T& value)
+	{
+		llist *ptr = new llist;
+		ptr->value = value;
+		ptr->next = NULL;
+		ptr->prev = _tail;
+		if( _tail != NULL)
+			_tail->next = ptr;
+		if( _head == NULL )
+			_head = ptr;
+		_tail = ptr;
+		_count++;
+	}
 	void pop_front()
 	{
-		llist *front = _data;
-		if (front)
+		llist *delete_me = _head;
+		_head = _head->next;
+		if( _head )
+			_head->prev = _head->prev->prev;
+		else 
+			_tail = NULL;
+
+		delete delete_me;
+
+	}
+	void pop_back()
+	{
+		llist *delete_me = _tail;
+		_tail = _tail->prev;
+		if( _tail )
+			_tail->next = _tail->next->next;
+		else 
+			_head = NULL;
+
+		delete delete_me;
+	}
+	void reverse ()
+	{
+		if( size() <= 1 )
+			return;
+		llist *curr = _head;
+		llist *tmp;
+		while( curr != NULL )
 		{
-			_data = front->next;
-			delete front;
-			_size--;
-		}
+			tmp = curr->prev;
+			curr->prev = curr->next;
+			curr->next = tmp;
+			curr = curr->prev;
+		}	
+		if(tmp)
+			tmp = tmp->prev;
+		_tail = _head; _head = tmp;
 	}
 
 	bool empty() const
 	{
-		return _data == 0;
+		return size() == 0;
 	}
 
 	size_t size() const
 	{
-		return _size;
+		size_t count = 0;
+		if( _head == NULL ) 
+			return count;
+		if( _head == _tail)
+		{
+			count++;
+			return count;
+		}
+
+		for( llist *temp = _head; temp != NULL; temp = temp->next, count++ ){}
+		
+		return count;
 	}
+
+	void clear()// noexcept
+	{
+		while( !empty())
+		{
+			pop_back();
+		}
+	}
+	
+	void unique()
+	{
+		for (llist *i = _head; i != 0; i = i -> next)
+		{
+			while(i ->next != 0 && i -> value == i -> next -> value)
+			{
+				llist *save = i->next;
+				i->next = save->next;
+
+				if (save->next != 0)
+				{
+					save->next->prev = i;
+					delete save;
+				} 
+				else
+				{	_tail = i;
+					delete save;
+				}
+			}
+		}
+	}
+	
+
 };
 
-#endif // __EE231_List_h__
