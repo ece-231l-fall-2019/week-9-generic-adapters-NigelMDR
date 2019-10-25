@@ -1,3 +1,4 @@
+#include <initializer_list>
 
 template<typename T>
 
@@ -10,6 +11,10 @@ class Stack
      	T& top()
 	{
 		return c.back();
+	}
+	Stack(const std::initializer_list<T> l) : c(l) 
+	{
+		
 	}
      	const T& top() const
      	{
@@ -50,8 +55,6 @@ inline bool operator==(const Stack<V>& a, const Stack<V>& b)
 template<typename V>
 inline bool operator!=(const Stack<V>& a, const Stack<V>& b)
 {
-	if( a.c == b.c)
-		return false;
-	return true;
+	return a.c != b.c;
 }
 

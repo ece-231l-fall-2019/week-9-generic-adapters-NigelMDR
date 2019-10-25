@@ -8,12 +8,7 @@
 #if 1
 #include "List.h"
 #include "Queue.h"
-// typedef List<std::string> StringList;
-// typedef List<int> IntList;
 #include "Stack.h"
-
-//typedef Stack<std::string> StringStack;
-//typedef Stack<int> IntStack;
 
 typedef List<std::string> StringLlist;
 typedef List<int> IntLlist;
@@ -33,13 +28,6 @@ typedef Stack<double> DoubleStack;
 #include <list>
 #include <stack>
 #include <queue>
-/*
-typedef std::list<std::string> StringList;
-typedef std::list<int> IntList;
-#include <stack>
-typedef std::stack<std::string> StringStack;
-typedef std::stack<int> IntStack;
-*/
 
 typedef std::list<std::string> StringLlist;
 typedef std::list<int> IntLlist;
@@ -85,6 +73,8 @@ int main()
 	StringLlist SAM;
 	SAM = BOB;
 
+//	Assert(SAM == BOB, "SAM == BOB");
+
 	Assert(SAM.front() == "D", "SAM Front == D");
 	SAM.pop_front();
 	Assert(SAM.front() == "E", "SAM Front == E");
@@ -97,7 +87,7 @@ int main()
 
 /* +++++++++++  StringStack ++++++++++ */
 
-	StringStack JAY;
+	StringStack JAY{};
 	JAY.push("A");
 	Assert(JAY.top() == "A", "JAY Top == A");
 	JAY.push("E");
@@ -105,8 +95,10 @@ int main()
 	JAY.push("D");
 	Assert(JAY.top() == "D", "JAY Top == D");
 	
-	StringStack JACK;
+	StringStack JACK{};
 	JACK = JAY;
+
+	Assert(JACK == JAY, "JACK == JAY");
 
 	Assert(JACK.top() == "D", "JACK Top == D");
 	JACK.pop();
@@ -171,7 +163,7 @@ int main()
 
 /* +++++++++++ DoubleStack ++++++++++ */
 	
-	DoubleStack STEVE;
+	DoubleStack STEVE{};
 	STEVE.push(8.5);
 	STEVE.push(9.5);
 	STEVE.push(9.5);
@@ -184,7 +176,7 @@ int main()
 	STEVE.pop();
 	Assert(STEVE.top() == 2.5, "STEVE top is 2.5");
 
-	DoubleStack ROB;
+	DoubleStack ROB{};
 	ROB = STEVE;
 
 	STEVE.pop();
@@ -253,7 +245,7 @@ int main()
 
 /* +++++++++++ IntStack ++++++++++ */
 
-	IntStack VIM;
+	IntStack VIM{};
 	VIM.push(85);
 	VIM.push(95);
 	VIM.push(95);
@@ -266,7 +258,7 @@ int main()
 	VIM.pop();
 	Assert(VIM.top() == 25, "VIM top is 25");
 
-	IntStack RODOLFO;
+	IntStack RODOLFO{};
 	RODOLFO = VIM;
 
 	VIM.pop();

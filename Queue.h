@@ -56,7 +56,5 @@ inline bool operator==(const Queue<V>& a, const Queue<V>& b)
 template <typename V>
 inline bool operator!=(const Queue<V>& a, const Queue<V>& b)
 {
-	if( a.c == b.c)
-		return true;
-	return false;
+	return a.c != b.c;
 }

@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+#include <initializer_list>
 
 
 template<typename T>
@@ -16,6 +17,7 @@ class List
 	llist *_tail;
 	size_t _count;
 
+
 	public:
 	// default constructor
 	List()
@@ -27,6 +29,15 @@ class List
 
 	// copy constructor
 	List(const List<T>&);
+	List(const std::initializer_list<T>& l)
+	{
+		_head = 0;
+		_tail = 0;
+		_count = 0;
+		for(auto value : l)
+			push_back(value);
+	}
+
 	// destructor
 	~List()
 	{
@@ -52,7 +63,6 @@ class List
 	{
 		return _tail->value;
 	}
-	
 	const T& front() const
 	{
 		return _head->value;
@@ -81,8 +91,8 @@ class List
 		ptr->next = _head;
 		if( _head != NULL)
 			_head->prev = ptr;
-		if( _head == NULL )
-			_head = ptr;
+		if( _tail == NULL )
+			_tail = ptr;
 		_head = ptr;
 		_count++;
 		
@@ -165,12 +175,11 @@ class List
 
 	void clear()// noexcept
 	{
-		while( !empty())
+		while( !empty() )
 		{
 			pop_back();
 		}
 	}
-	
 	void unique()
 	{
 		for (llist *i = _head; i != 0; i = i -> next)
@@ -192,7 +201,52 @@ class List
 			}
 		}
 	}
-	
+	template <typename V>
+	friend bool operator==(const List<V>& lhs, const List<V>& rhs);
+	template <typename V>
+	friend bool operator!=(const List<V>& lhs, const List<V>& rhs);
 
 };
+	template <typename V>
+	inline bool operator==(const List<V>& lhs, const List<V>& rhs)
+	{
+		//Check First value and Last  value 
+//		return lhs._head->value == rhs._head->value && lhs._tail->value == rhs._tail->value;  
+		llist::List<V> Lbegin = lhs;
+		llist::List<V> Rbegin = rhs;
+	
+		if( rhs.size() == lhs.size() && lhs._head->next != NULL)
+		{
+			while( Lbegin._head != NULL && Lbegin._head->value == Rbegin._head->value ) 
+			{
+				Lbegin._head = Lbegin._head->next; Rbegin._head = Rbegin._head->next;
+			}
+		}
+		return Lbegin._head->value == Rbegin._head->value;
+	}
+/*	
+	template <typename V>
+	inline bool operator==(const List<V>& lhs, const List<V>& rhs)
+	{
+		//Check First value and Last  value 
+//		return lhs._head->value == rhs._head->value && lhs._tail->value == rhs._tail->value;  
+		llist *Lbegin = lhs._head;
+		llist *Rbegin = rhs._head;
+	
+		if( rhs.size() == lhs.size() && lhs->next != NULL)
+		{
+			while( Lbegin != NULL && Lbegin->value == Rbegin->value ) 
+			{
+				Lbegin = Lbegin->next; Rbegin= Rbegin->next;
+			}
+		}
+		return Lbegin->value == Rbegin->value;
+	}
+*/
+
+	template <typename V>
+	inline bool operator!=(const List<V>& lhs, const List<V>& rhs)
+	{
+		return !(lhs == rhs);
+	}
 
