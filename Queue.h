@@ -4,6 +4,7 @@ class Queue
 {
   	protected:
    	List<T> c;
+
   	public:
      	T& front()
 	{

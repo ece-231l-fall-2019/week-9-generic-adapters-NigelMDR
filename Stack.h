@@ -57,4 +57,3 @@ inline bool operator!=(const Stack<V>& a, const Stack<V>& b)
 {
 	return a.c != b.c;
 }
-
