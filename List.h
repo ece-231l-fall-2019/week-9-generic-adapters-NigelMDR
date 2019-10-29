@@ -210,8 +210,6 @@ class List
 	template <typename V>
 	bool operator==(const List<V>& lhs, const List<V>& rhs)
 	{
-		//Check First value and Last  value 
-//		return lhs._head->value == rhs._head->value && lhs._tail->value == rhs._tail->value;  
 		auto Lbegin = lhs._head;
 		auto Rbegin = rhs._head;
 	

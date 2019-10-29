@@ -73,7 +73,7 @@ int main()
 	StringLlist SAM;
 	SAM = BOB;
 
-//	Assert(SAM == BOB, "SAM == BOB");
+	Assert(SAM == BOB, "SAM == BOB");
 
 	Assert(SAM.front() == "D", "SAM Front == D");
 	SAM.pop_front();
@@ -84,6 +84,8 @@ int main()
 	Assert(SAM.size() == 0, "SAM is size == 0");
 	Assert(BOB.empty() == false, "BOB is Not EMPTY");
 	Assert(BOB.size() == 3, "BOB is size == 3");
+	
+	Assert(SAM != BOB, "SAM != BOB");
 
 /* +++++++++++  StringStack ++++++++++ */
 
@@ -109,6 +111,8 @@ int main()
 	Assert(JACK.size() == 0, "JACK size is 0");
 	Assert(JAY.empty() == false, "JAY is Not EMPTY");
 	Assert(JAY.size() == 3, "JAY size is 3");
+	
+	Assert(JACK != JAY, "JACK != JAY");
 
 /* +++++++++++ StringQueue ++++++++++ */
 
@@ -123,6 +127,8 @@ int main()
 	StringQueue ROBERT;
 	ROBERT = HELO;
 
+	Assert( ROBERT == HELO, "ROBERT == HELO");
+
 	Assert(ROBERT.front() == "A", "ROBERT Front== A");
 	ROBERT.pop();
 	Assert(ROBERT.front() == "E", "ROBERT Front == E");
@@ -133,6 +139,8 @@ int main()
 	Assert(ROBERT.size() == 0, "ROBERT size is 0");
 	Assert(HELO.empty() == false, "HELO is Not EMPTY");
 	Assert(HELO.size() == 3, "HELO size is 3");
+	
+	Assert( ROBERT != HELO, "ROBERT != HELO");
 
 /* +++++++++++ DoubleLlist ++++++++++ */
 
@@ -151,6 +159,8 @@ int main()
 
 	DoubleLlist WALKER;
 	WALKER = ALAN;
+
+	Assert(WALKER == ALAN, "WALKER == ALAN");
 
 	ALAN.pop_back();
 	ALAN.pop_back();
@@ -179,6 +189,8 @@ int main()
 	DoubleStack ROB{};
 	ROB = STEVE;
 
+	Assert(ROB == STEVE, "ROB == STEVE");
+
 	STEVE.pop();
 	STEVE.pop();
 	STEVE.pop();
@@ -187,6 +199,8 @@ int main()
 	Assert(STEVE.size() == 0, "STEVE size is 0");
 	Assert(ROB.empty()  ==  false, "ROB is not EMPTY");
 	Assert(ROB.size() == 4, "BOB size is 4");
+	
+	Assert(ROB != STEVE, "ROB != STEVE");
 
 /* +++++++++++ DoubleQueue ++++++++++ */
 	
@@ -207,6 +221,8 @@ int main()
 	DoubleQueue TANK;
 	TANK = XAVI;
 
+	Assert(TANK == XAVI, "TANK == XAVI");	
+
 	XAVI.pop();
 	XAVI.pop();
 	XAVI.pop();
@@ -215,6 +231,8 @@ int main()
 	Assert(XAVI.size() == 0, "XAVI size is 0");
 	Assert(TANK.empty() == false, "TANK is not EMPTY");
 	Assert(TANK.size() == 4, "TANK size is 4");
+	
+	Assert(TANK != XAVI, "TANK != XAVI");	
 
 /* +++++++++++ IntLlist ++++++++++ */
 
@@ -234,6 +252,8 @@ int main()
 	IntLlist BRIAN;
 	BRIAN = OWL;
 
+	Assert(BRIAN == OWL, "BRIAN == OWL");
+
 	OWL.pop_back();
 	OWL.pop_back();
 	OWL.pop_back();
@@ -242,6 +262,8 @@ int main()
 	Assert(OWL.size() == 0, "OWL size is 0");
 	Assert(BRIAN.empty() == false, "BRIAN is not EMPTY");
 	Assert(BRIAN.size() == 4, "BRIAN size is 4");
+	
+	Assert(BRIAN != OWL, "BRIAN != OWL");
 
 /* +++++++++++ IntStack ++++++++++ */
 
@@ -261,6 +283,8 @@ int main()
 	IntStack RODOLFO{};
 	RODOLFO = VIM;
 
+	Assert(RODOLFO == VIM, "RODOLFO == VIM");
+
 	VIM.pop();
 	VIM.pop();
 	VIM.pop();
@@ -269,6 +293,8 @@ int main()
 	Assert(VIM.size() == 0, "RODOLFO size is 0");
 	Assert(RODOLFO.empty() == false, "RODOLFO is not EMPTY");
 	Assert(RODOLFO.size() == 4, "RODOLFO size is 4");
+	
+	Assert(RODOLFO != VIM, "RODOLFO != VIM");
 
 /* +++++++++++ IntQueue ++++++++++ */
 	
@@ -289,6 +315,8 @@ int main()
 	IntQueue URCI;
 	URCI = LIAN;
 
+	Assert(URCI == LIAN, "URCI == LIAN");
+
 	LIAN.pop();
 	LIAN.pop();
 	LIAN.pop();
@@ -297,6 +325,8 @@ int main()
 	Assert(LIAN.size() == 0, "LIAN size is 0");
 	Assert(URCI.empty() == false, "URCI is not EMPTY");
 	Assert(URCI.size() == 4, "URCI size is 4");
+	
+	Assert(URCI != LIAN, "URCI != LIAN");
 
 	return 0;
 }
